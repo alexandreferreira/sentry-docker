@@ -14,6 +14,7 @@ RUN apt-get install -y python python-dev python-setuptools
 RUN apt-get install -y python-pip python-virtualenv
 RUN apt-get install -y nginx supervisor
 run apt-get install -y libffi-dev
+RUN apt-get install -y libjpeg-dev
 
 RUN pip install -U pip setuptools
 

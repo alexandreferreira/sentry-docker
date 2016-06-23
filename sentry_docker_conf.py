@@ -42,7 +42,7 @@ def nydus_config(from_env_var):
         _redis_hosts[r_index] = {'host': r_host_pair[0], 'port': int(r_host_pair[1])}
 
     return {
-        'hosts': _redis_hosts
+        'cluster': _redis_hosts
     }
 
 
@@ -98,7 +98,7 @@ if SENTRY_USE_REDIS_TSDB:
 ################
 
 # You MUST configure the absolute URI root for Sentry:
-SENTRY_URL_PREFIX = config('SENTRY_URL_PREFIX')  # No trailing slash!
+SENTRY_OPTIONS['system.url-prefix'] = config('SENTRY_URL_PREFIX')  # No trailing slash!
 
 # If you're using a reverse proxy, you should enable the X-Forwarded-Proto
 # and X-Forwarded-Host headers, and uncomment the following settings
@@ -125,16 +125,16 @@ SENTRY_ALLOW_ORIGIN = config('SENTRY_ALLOW_ORIGIN', default=None)
 # For more information check Django's documentation:
 #  https://docs.djangoproject.com/en/1.3/topics/email/?from=olddocs#e-mail-backends
 
-EMAIL_BACKEND = config('SENTRY_EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
+SENTRY_OPTIONS['mail.backend'] = config('SENTRY_EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
 
-EMAIL_HOST = config('SENTRY_EMAIL_HOST', default='localhost')
-EMAIL_HOST_PASSWORD = config('SENTRY_EMAIL_HOST_PASSWORD', default='')
-EMAIL_HOST_USER = config('SENTRY_EMAIL_HOST_USER', default='')
-EMAIL_PORT = config('SENTRY_EMAIL_PORT', default=25, cast=int)
-EMAIL_USE_TLS = config('SENTRY_EMAIL_USE_TLS', default=False, cast=bool)
+SENTRY_OPTIONS['mail.host'] = config('SENTRY_EMAIL_HOST', default='localhost')
+SENTRY_OPTIONS['mail.password']  = config('SENTRY_EMAIL_HOST_PASSWORD', default='')
+SENTRY_OPTIONS['mail.username'] = config('SENTRY_EMAIL_HOST_USER', default='')
+SENTRY_OPTIONS['mail.port']  = config('SENTRY_EMAIL_PORT', default=25, cast=int)
+SENTRY_OPTIONS['mail.use-tls'] = config('SENTRY_EMAIL_USE_TLS', default=False, cast=bool)
 
 # The email address to send on behalf of
-SERVER_EMAIL = config('SENTRY_SERVER_EMAIL', default='root@localhost')
+SENTRY_OPTIONS['mail.from'] = config('SENTRY_SERVER_EMAIL', default='root@localhost')
 
 ###########
 # etc. ##
@@ -144,7 +144,7 @@ SENTRY_FEATURES['auth:register'] = config('SENTRY_ALLOW_REGISTRATION', default=F
 
 # If this file ever becomes compromised, it's important to regenerate your SECRET_KEY
 # Changing this value will result in all current sessions being invalidated
-SECRET_KEY = config('SECRET_KEY')
+SENTRY_OPTIONS['system.secret-key'] = config('SECRET_KEY')
 
 # http://twitter.com/apps/new
 # It's important that input a callback URL, even if its useless. We have no idea why, consult Twitter.
@@ -176,7 +176,7 @@ ALLOWED_HOSTS = ['*']
 LOGGING['disable_existing_loggers'] = False
 
 SENTRY_BEACON = config('SENTRY_BEACON', default=True, cast=bool)
-SENTRY_ADMIN_EMAIL = config('SENTRY_ADMIN_EMAIL', default='root@localhost')
+SENTRY_OPTIONS['system.admin-email'] = config('SENTRY_ADMIN_EMAIL', default='root@localhost')
 
 ####################
 # LDAP settings ##

@@ -42,7 +42,7 @@ def nydus_config(from_env_var):
         _redis_hosts[r_index] = {'host': r_host_pair[0], 'port': int(r_host_pair[1])}
 
     return {
-        'cluster': _redis_hosts
+        'hosts': _redis_hosts
     }
 
 

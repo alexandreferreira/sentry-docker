@@ -10,6 +10,7 @@ hiredis==0.2.0
 # sentry
 sentry[postgres]==8.5.1
 supervisor-stdout
+librabbitmq==1.6.1
 
 # ldap user store
 django-auth-ldap==1.2.7

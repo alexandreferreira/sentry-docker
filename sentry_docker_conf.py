@@ -77,7 +77,7 @@ SENTRY_USE_REDIS_BUFFERS = config('SENTRY_USE_REDIS_BUFFERS', default=False, cas
 
 if SENTRY_USE_REDIS_BUFFERS:
     SENTRY_BUFFER = 'sentry.buffer.redis.RedisBuffer'
-    SENTRY_OPTIONS["redis.clusters"] = nydus_config('SENTRY_REDIS_BUFFERS')
+    SENTRY_OPTIONS["redis.clusters"]["default"] = nydus_config('SENTRY_REDIS_BUFFERS')
     SENTRY_CACHE = 'sentry.cache.redis.RedisCache'
 
 #######################

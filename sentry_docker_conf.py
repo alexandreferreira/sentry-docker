@@ -91,7 +91,7 @@ SENTRY_USE_REDIS_TSDB = config('SENTRY_USE_REDIS_TSDB', default=False, cast=bool
 
 if SENTRY_USE_REDIS_TSDB:
     SENTRY_TSDB = 'sentry.tsdb.redis.RedisTSDB'
-    SENTRY_TSDB_OPTIONS["cluster"] = nydus_config('SENTRY_REDIS_TSDBS')
+    SENTRY_TSDB_OPTIONS["cluster"] = "default"
 
 ################
 # Web Server ##
